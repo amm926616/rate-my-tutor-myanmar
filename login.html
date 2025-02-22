@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Rate My Tutor</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* Centering the login box */
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Input fields */
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Login button */
+        .login-container button {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Error message */
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header">
+        <a href="index.html" class="title">Rate My Tutor</a>
+        <nav>
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html">Tutors</a></li>
+                <li><a href="login.html" class="active">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="wrapper fade-up">
+        <div class="login-container">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Enter Username">
+            <input type="password" id="password" placeholder="Enter Password">
+            <button onclick="login()">Login</button>
+            <p class="error-message" id="error-message"></p>
+        </div>
+    </section>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+
+            if (username.trim() === "" || password.trim() === "") {
+                errorMessage.textContent = "Username and password cannot be empty.";
+                return;
+            }
+
+            // Example: Simple hardcoded user validation (Replace with backend authentication)
+            if (username === "admin" && password === "password123") {
+                localStorage.setItem("loggedInUser", username);
+                alert("Login successful!");
+                window.location.href = "index.html"; // Redirect to homepage
+            } else {
+                errorMessage.textContent = "Invalid username or password.";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

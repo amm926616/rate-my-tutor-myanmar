@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Details</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <a href="index.html" class="title">Rate My Tutor</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">About</a></li>
+                <li><a href="tutors.html">Tutors</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="wrapper">
+        <!-- Tutor Details Section -->
+        <section id="main" class="wrapper fade-up">
+            <div class="inner">
+                <div id="tutor-details"></div>
+                <!-- Reviews List -->
+                <div>
+                    <h3>Reviews</h3>
+                    <ul id="reviews-list"></ul>
+                </div>
+
+                <!-- Review Form Section -->
+                <div>
+                    <h3>Leave a Review</h3>
+                    <textarea id="review-input" placeholder="Your review here..."></textarea>
+                    <button onclick="submitReview()">Submit</button>
+
+                    <!-- Tutor details will be injected here dynamically -->
+                </div>
+        </section>
+
+
+    </div>
+    <script>
+        // Get tutor name from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const tutorName = decodeURIComponent(urlParams.get('tutor'));
+
+        // Fetch tutor data from JSON and display
+        fetch('tutors.json')
+            .then(response => response.json())
+            .then(tutors => {
+                const tutor = tutors.find(t => t.name === tutorName);
+                if (tutor) {
+                    // Tutor details HTML structure
+                    const tutorDetailsHTML = `
+                        <div class="tutor-profile">
+                            <h1 class="major">${tutor.name}</h1>
+                            <img src="${tutor.image}" alt="${tutor.name}" class="image fit">
+                            <p><strong>Age:</strong> ${tutor.age}</p>
+                            <p><strong>Education:</strong> ${tutor.education}</p>
+                            <p><strong>Subjects:</strong> ${tutor.subjects}</p>
+                            <p><strong>Contact:</strong> ${tutor.contact}</p>
+                            <p><strong>Teaching Style:</strong> ${tutor.style}</p>
+                            <p><strong>Personality:</strong> ${tutor.personality}</p>
+                            <p><strong>Rating:</strong> ${generateRatingStars(tutor.rating)} (${tutor.rating}/5)</p>
+                        </div>
+                    `;
+                    document.getElementById("tutor-details").innerHTML = tutorDetailsHTML;
+
+                    // Display reviews
+                    const reviewsHTML = tutor.reviews.map(review => `<li>${review}</li>`).join('');
+                    document.getElementById("reviews-list").innerHTML = reviewsHTML;
+                } else {
+                    document.getElementById("tutor-details").innerHTML = "<p>Tutor not found.</p>";
+                }
+            })
+            .catch(error => {
+                console.error("Error loading tutors:", error);
+                document.getElementById("tutor-details").innerHTML = "<p>Error loading tutor details.</p>";
+            });
+
+        // Function to submit review
+        function submitReview() {
+            const reviewText = document.getElementById("review-input").value;
+            if (reviewText.trim() !== "") {
+                // Add review to the list (just a simple example, you'll need to handle saving the review in a database or file)
+                const reviewItem = document.createElement("li");
+                reviewItem.textContent = reviewText;
+                document.getElementById("reviews-list").appendChild(reviewItem);
+
+                // Clear input field after submission
+                document.getElementById("review-input").value = "";
+            } else {
+                alert("Please enter a review.");
+            }
+        }
+
+        // Helper function to generate rating stars
+        function generateRatingStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+            let stars = '';
+            for (let i = 0; i < fullStars; i++) {
+                stars += '⭐';
+            }
+            if (halfStar) {
+                stars += '⯪';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '☆';
+            }
+            return stars;
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer id="footer" class="wrapper style1-alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; Untitled. All rights reserved.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

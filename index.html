@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Rate My Tutor | Find Tutors</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css">
+    </noscript>
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <a href="index.html" class="title">Rate My Tutor</a>
+        <nav>
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html" class="active">Tutors</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Search Section -->
+        <section id="main" class="wrapper fullscreen style1-alt fade-up">
+            <div class="inner">
+                <h2>Welcome to Rate My Tutor - Myanmar!</h2>
+                <p>Find honest, unfiltered tutor reviews from real students. Some tutors are amazing, while others shouldn’t be teaching at all—you’ll see them all here.
+
+                    Help improve the teaching industry by sharing your experience. Whether good or bad, be honest and let others know!
+                    
+                    Search by name or subject to find the best (and worst) tutors.</p>
+                <div class="box">
+                    <!-- Search Bar with Button -->
+                    <div class="row">
+                        <div class="col-8 col-12-small">
+                            <input type="text" id="search-bar" placeholder="Search by tutor name or subject..."
+                                onkeyup="filterTutors()">
+                        </div>
+                        <div class="col-4 col-12-small">
+                            <ul class="actions">
+                                <li><a href="#tutors-list" class="button scrolly">Show</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <!-- Subject Dropdown -->
+                        <div class="col-6 col-12-small">
+                            <div class="select-wrapper">
+                                <select id="search-type">
+                                    <option value="all-subjects">All Subjects</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="science">Science</option>
+                                    <option value="english">English</option>
+                                    <option value="history">History</option>
+                                    <option value="computer-science">Computer Science</option>
+                                    <option value="physics">Physics</option>
+                                    <option value="chemistry">Chemistry</option>
+                                    <option value="biology">Biology</option>
+                                    <option value="economics">Economics</option>
+                                    <option value="arts">Arts</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Radio Buttons -->
+                        <div class="col-6 col-12-small">
+                            <input type="radio" id="search-by-name" name="search-mode" checked>
+                            <label for="search-by-name">Search by Name</label>
+
+                            <input type="radio" id="search-by-subjects" name="search-mode">
+                            <label for="search-by-subjects">Search by Subject</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutors List -->
+        <section id="tutors-list" class="wrapper">
+            <div class="inner">
+                <h2>Explore Tutors Reviewed and Added by Learners Like You</h2>
+                <div id="tutors-container">
+                    <!-- Tutor cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section to Add New Tutor -->
+        <section class="wrapper style1-alt fade-up">
+            <div class="inner">
+                <div class="box">
+                    <h2>Share Your Experience!</h2>
+                    <p>Know a tutor you've learned from before? Add their profile and share your thoughts! Be
+                        honest—whether they were amazing or absolutely terrible. If they shouldn't even be teaching,
+                        don’t hold back. Let others know the truth!</p>
+                    <form id="add-tutor-form" method="post" action="#">
+                        <div class="row gtr-uniform">
+                            <!-- Tutor Name -->
+                            <div class="col-12">
+                                <label for="tutor-name">Tutor Name</label>
+                                <input type="text" id="tutor-name" name="name" placeholder="Enter Tutor's Full Name"
+                                    required />
+                            </div>
+                            <!-- Age -->
+                            <div class="col-6 col-12-small">
+                                <label for="tutor-age">Age</label>
+                                <input type="number" id="tutor-age" style="color: rgb(30, 6, 92);" name="age"
+                                    placeholder="Enter Age" min="18" max="99" required />
+                            </div>
+                            <!-- Education -->
+                            <div class="col-6 col-12-small">
+                                <label for="tutor-education">Education</label>
+                                <input type="text" id="tutor-education" name="education"
+                                    placeholder="Enter Education Level" required />
+                            </div>
+                            <!-- Subjects -->
+                            <div class="col-12">
+                                <label for="tutor-subjects">Subjects</label>
+                                <input type="text" id="tutor-subjects" name="subjects"
+                                    placeholder="Enter Subjects (comma separated)" required />
+                            </div>
+                            <!-- Address -->
+                            <div class="col-12">
+                                <label for="tutor-address">Address</label>
+                                <input type="text" id="tutor-address" name="address" placeholder="Enter Address"
+                                    required />
+                            </div>
+                            <!-- Contact Email -->
+                            <div class="col-12">
+                                <label for="tutor-contact">Contact Email</label>
+                                <input type="email" id="tutor-contact" name="contact" placeholder="Enter Contact Email"
+                                    required />
+                            </div>
+                            <!-- Currently Teaching -->
+                            <div class="col-12">
+                                <label for="tutor-teaching">Currently Teaching</label>
+                                <input type="text" id="tutor-teaching" name="teaching"
+                                    placeholder="Enter Current Teaching Status" required />
+                            </div>
+                            <!-- Teaching Style -->
+                            <div class="col-12">
+                                <label for="tutor-style">Teaching Style</label>
+                                <input type="text" id="tutor-style" name="style" placeholder="Enter Teaching Style"
+                                    required />
+                            </div>
+                            <!-- Personality Traits -->
+                            <div class="col-12">
+                                <label for="tutor-personality">Personality Traits</label>
+                                <input type="text" id="tutor-personality" name="personality"
+                                    placeholder="Enter Personality Traits" required />
+                            </div>
+                            <!-- Rating -->
+                            <div class="col-6 col-12-small">
+                                <label for="tutor-rating">Rating (1-5)</label>
+                                <input type="number" step="0.1" id="tutor-rating" name="rating"
+                                    style="color: rgb(30, 6, 92);" placeholder="Enter Rating (1-5)" min="1" max="5"
+                                    required />
+                            </div>
+                            <!-- Image URL -->
+                            <div class="col-6 col-12-small">
+                                <label for="tutor-image">Image URL</label>
+                                <input type="url" id="tutor-image" name="image" placeholder="Enter Image URL"
+                                    style="color: rgb(30, 6, 92);" required />
+                            </div>
+                            <!-- Reviews -->
+                            <div class="col-12">
+                                <label for="tutor-reviews">Reviews</label>
+                                <textarea name="reviews" id="tutor-reviews"
+                                    placeholder="Enter Tutor Reviews (comma separated)" rows="4" required></textarea>
+                            </div>
+                            <!-- Form Actions -->
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <li><input type="submit" value="Add Tutor" class="primary" /></li>
+                                    <li><input type="reset" value="Reset" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div> <!-- End of Wrapper -->
+
+    <!-- Footer -->
+    <footer id="footer" class="wrapper style1-alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; Untitled. All rights reserved.</li>
+                <li>Rate My Tutor - Myanmar</li>
+            </ul>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        let tutorsData = [];
+
+        document.getElementById('search-bar').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                filterTutors(); // Call the function when Enter is pressed
+                document.getElementById('tutors-list').scrollIntoView({ behavior: 'smooth' }); // Scroll to the tutors list
+            }
+        });
+
+        function filterTutors() {
+            const searchValue = document.getElementById("search-bar").value.toLowerCase();
+            const searchByName = document.getElementById("search-by-name").checked;
+            const container = document.getElementById("tutors-container");
+            container.innerHTML = ""; // Clear the current results
+
+            const filteredTutors = tutorsData
+                .filter(tutor => searchByName
+                    ? tutor.name.toLowerCase().includes(searchValue)
+                    : tutor.subjects.toLowerCase().includes(searchValue));
+
+            if (filteredTutors.length === 0) {
+                // Show no results found message
+                container.innerHTML = "<p>No tutors found matching your search criteria.</p>";
+            } else {
+                // Display the filtered tutors
+                filteredTutors.forEach(tutor => {
+                    const section = document.createElement("div");
+
+                    section.innerHTML = `
+                <a href="tutor.html?tutor=${encodeURIComponent(tutor.name)}" class="tutor-card-link">
+                    <div class="tutor-card">
+                        <img src="${tutor.image}" alt="${tutor.name}">
+                        <h3>Tutor: ${tutor.name}</h3>
+                        <p><strong>tutor id: </strong> ${tutor.id}</p>
+                        <p><strong>Rating:</strong> ${generateRatingStars(tutor.rating)} (${tutor.rating}/5)</p>
+                        <p><strong>Education:</strong> ${tutor.education}</p>
+                        <p><strong>Subjects:</strong> ${tutor.subjects}</p>
+                        <p><strong>Currently Teaching:</strong> ${tutor.teaching}</p>
+                    </div>
+                </a>
+            `;
+                    container.appendChild(section);
+                });
+            }
+        }
+
+        fetch('tutors.json')
+            .then(response => response.json())
+            .then(tutors => {
+                tutorsData = tutors;
+                filterTutors();
+            })
+            .catch(error => {
+                console.error("Error loading tutors:", error);
+                document.getElementById("tutors-container").innerHTML = "<p>Failed to load tutors. Please try again later.</p>";
+            });
+
+        function generateRatingStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            let stars = '';
+            for (let i = 0; i < fullStars; i++) stars += '★'; // ⭐
+            if (halfStar) stars += '⯪'; // No direct half-star emoji, so using a full star instead
+            for (let i = 0; i < emptyStars; i++) stars += '☆';
+            return stars;
+        }
+
+
+        document.getElementById('add-tutor-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const newTutor = {
+                id: document.getElementById('id').value,
+                name: document.getElementById('tutor-name').value,
+                age: parseInt(document.getElementById('tutor-age').value),
+                education: document.getElementById('tutor-education').value,
+                subjects: document.getElementById('tutor-subjects').value,
+                address: document.getElementById('tutor-address').value,
+                contact: document.getElementById('tutor-contact').value,
+                teaching: document.getElementById('tutor-teaching').value,
+                style: document.getElementById('tutor-style').value,
+                personality: document.getElementById('tutor-personality').value,
+                rating: parseFloat(document.getElementById('tutor-rating').value),
+                image: document.getElementById('tutor-image').value,
+                reviews: document.getElementById('tutor-reviews').value.split(',').map(review => review.trim())
+            };
+
+            // Assuming a backend API that handles the tutor data
+            fetch('/api/add-tutor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newTutor)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Tutor added successfully!');
+                        window.location.href = 'tutors.html'; // Redirect to tutors page
+                    } else {
+                        alert('Error adding tutor. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error adding the tutor.');
+                });
+        });
+
+
+        document.getElementById("search-by-name").addEventListener("change", filterTutors);
+        document.getElementById("search-by-subjects").addEventListener("change", filterTutors);
+    </script>
+
+</body>
+
+</html>
